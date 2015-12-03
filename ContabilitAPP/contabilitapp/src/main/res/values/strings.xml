@@ -1,0 +1,21 @@
+<resources>
+    <string name="contabilitapp">ContabilitApp</string>
+    <string-array name="menu_items">
+        <item>Home</item>
+        <item>Saldo</item>
+        <item>Movimenti</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Impostazioni</string>
+    <string name="action_add_movimento">Nuovo</string>
+    <string name="action_add_movimento_mic">Nuovo (a voce)</string>
+
+    <string name="action_search">Cerca</string>
+
+    <string name="speech_not_supported">Spiacente! Il tuo device non supporta lo speech input</string>
+    <string name="speech_prompt">Parla&#8230;</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

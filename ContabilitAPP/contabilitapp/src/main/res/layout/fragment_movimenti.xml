@@ -1,0 +1,45 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="it.negro.contabilitapp.MovimentiFragment">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+        <Button xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/speechButton"
+                style="@android:style/Widget.Button.Small"
+        />
+
+    </LinearLayout>
+
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </TableRow>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        <TableLayout
+                android:id="@+id/movimentiGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" >
+
+        </TableLayout>
+
+    </ScrollView>
+
+</LinearLayout>
