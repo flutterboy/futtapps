@@ -1,0 +1,241 @@
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">Saldo</div>
+			<div class="panel-body">
+				<canvas id="saldoChart" class="chart chart-line" chart-data="saldo"
+						chart-labels="saldoLabels" chart-legend="true" chart-series="saldoSeries"
+						chart-options="chartsOpts">
+				</canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Dal:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputSaldoDal" class="input-group">
+					<input
+							type="text"
+							class="form-control"
+							uib-datepicker-popup="dd/MM/yyyy"
+							ng-model="saldoDal.val"
+							is-open="saldoDal.opened"
+							datepicker-options="saldoDal.dateOptions"
+							ng-required="true"
+							current-text="Oggi"
+							clear-text="Pulisci"
+							close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="saldoDal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Al:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputSaldoAl" class="input-group">
+					<input
+							type="text"
+							class="form-control"
+							uib-datepicker-popup="dd/MM/yyyy"
+							ng-model="saldoAl.val"
+							is-open="saldoAl.opened"
+							datepicker-options="saldoAl.dateOptions"
+							ng-required="true"
+							current-text="Oggi"
+							clear-text="Pulisci"
+							close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="saldoAl.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary pull-left" ng-click="saldoDal.reset(); saldoAl.reset();">
+					<span class="glyphicon glyphicon-remove"></span>
+					Reset
+				</button>
+			</div>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary pull-right" ng-click="cercaSaldo()" ng-disabled="saldoDal.val == null && saldoAl.val == null">
+					<span class="glyphicon glyphicon-search"></span>
+					Cerca
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">Andamento Entrate/Uscite</div>
+			<div class="panel-body">
+				<canvas id="aeuChart" class="chart chart-line" chart-data="entrateUscite"
+						chart-labels="entrateUsciteLabels" chart-legend="true" chart-series="entrateUsciteSeries"
+						chart-options="chartsOpts">
+				</canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Dal:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputAeuDal" class="input-group">
+					<input
+							type="text"
+							class="form-control"
+							uib-datepicker-popup="dd/MM/yyyy"
+							ng-model="aeuDal.val"
+							is-open="aeuDal.opened"
+							datepicker-options="aeuDal.dateOptions"
+							ng-required="true"
+							current-text="Oggi"
+							clear-text="Pulisci"
+							close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="aeuDal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Al:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputAeuAl" class="input-group">
+					<input
+							type="text"
+							class="form-control"
+							uib-datepicker-popup="dd/MM/yyyy"
+							ng-model="aeuAl.val"
+							is-open="aeuAl.opened"
+							datepicker-options="aeuAl.dateOptions"
+							ng-required="true"
+							current-text="Oggi"
+							clear-text="Pulisci"
+							close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="aeuAl.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary pull-left" ng-click="aeuDal.reset(); aeuAl.reset();">
+					<span class="glyphicon glyphicon-remove"></span>
+					Reset
+				</button>
+			</div>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary pull-right" ng-click="cercaAeu()" ng-disabled="aeuDal.val == null && aeuAl.val == null">
+					<span class="glyphicon glyphicon-search"></span>
+					Cerca
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">Andamento Indice di Risparmio</div>
+			<div class="panel-body">
+				<canvas id="airChart" class="chart chart-line" chart-data="indiceRisparmio"
+						chart-labels="indiceRisparmioLabels" chart-legend="true" chart-series="indiceRisparmioSeries"
+						chart-options="chartsOpts">
+				</canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Dal:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputAirDal" class="input-group">
+					<input
+							type="text"
+							class="form-control"
+							uib-datepicker-popup="dd/MM/yyyy"
+							ng-model="airDal.val"
+							is-open="airDal.opened"
+							datepicker-options="airDal.dateOptions"
+							ng-required="true"
+							current-text="Oggi"
+							clear-text="Pulisci"
+							close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="airDal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Al:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputAirAl" class="input-group">
+					<input
+							type="text"
+							class="form-control"
+							uib-datepicker-popup="dd/MM/yyyy"
+							ng-model="airAl.val"
+							is-open="airAl.opened"
+							datepicker-options="airAl.dateOptions"
+							ng-required="true"
+							current-text="Oggi"
+							clear-text="Pulisci"
+							close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="airAl.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 15px;">
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary pull-left" ng-click="airDal.reset(); airAl.reset();">
+					<span class="glyphicon glyphicon-remove"></span>
+					Reset
+				</button>
+			</div>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary pull-right" ng-click="cercaAir()" ng-disabled="airDal.val == null && airAl.val == null">
+					<span class="glyphicon glyphicon-search"></span>
+					Cerca
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+

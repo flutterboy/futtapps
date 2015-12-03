@@ -1,0 +1,59 @@
+<div ng-controller="riepilogoController">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="page-header">
+				Riepilogo
+			</h1>
+		</div>
+	</div>
+	<div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel-c panel-orange-c">
+					<div class="panel-heading">
+						<h3 class="panel-title">Saldo</h3>
+					</div>
+					<div class="panel-body panel-body-orange text-right">
+						<div>{{saldo.importo}} €</div>
+						<div>(prev. a 30 gg: {{saldoA30.importo}} €)</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Andamento Saldo Globale</div>
+					<div class="panel-body">
+						<canvas id="line" class="chart chart-line" chart-data="chartData"
+								chart-labels="chartLabels" chart-legend="true" chart-series="chartSeries"
+								chart-click="onChartClick" chart-options="saldoOpts">
+						</canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel-c panel-warning-c">
+					<div class="panel-heading">
+						<h3 class="panel-title">Ultimi movimenti</h3>
+					</div>
+					<div class="panel-body panel-body-warning text-right">
+						<div ui-grid="ultimiMovimentiGridOptions" class="grid" ui-grid-auto-resize></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel-c panel-danger-c">
+					<div class="panel-heading">
+						<h3 class="panel-title">Prossime uscite</h3>
+					</div>
+					<div class="panel-body panel-body-danger text-right">
+						<div ui-grid="prossimeUsciteGridOptions" class="grid" ui-grid-auto-resize></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

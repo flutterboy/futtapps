@@ -1,0 +1,44 @@
+<div class="modal-header" style="{{m.style}}">
+	<div class="row modal-title">
+		<h3>
+			<i  ng-show="m.type == 'danger'">
+				<span class="glyphicon glyphicon-exclamation-sign"></span>
+			</i>
+			<i ng-show="m.type == 'success'">
+				<span class="glyphicon glyphicon-info-sign"></span>
+			</i>
+			{{m.title}}
+		</h3>
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+</div>
+<div class="modal-body" style="{{m.style}}">
+	<div class="row">
+		<span class="label label-{{m.type}}">Messaggio</span>
+		<div class="well">
+			{{m.data.message}}
+		</div>
+		
+		<span class="label label-{{m.type}}" ng-show="m.data.developerMessage != null">Messaggio per lo sviluppatore</span>
+		<div class="well" ng-show="m.data.developerMessage != null">
+			{{m.data.developerMessage}}
+		</div>
+		
+		<span class="label label-{{m.type}}" ng-show="m.data.exceptionName != null">Eccezione</span>
+		<div class="well" ng-show="m.data.exceptionName != null">
+			{{m.data.exceptionName}}
+		</div>
+		
+		<span class="label label-{{m.type}}" ng-show="m.data.stackTrace != null">Stacktrace</span>
+		<div class="well" style="max-height: 200px; overflow-y:scroll;" ng-show="m.data.stackTrace != null" ng-bind-html="bindStackTrace(m.data.stackTrace)">
+		</div> 
+	</div>
+</div>
+<div class="modal-footer" style="{{m.style}} margin-top: 0px;">
+	<button class="btn btn-{{m.type}}" type="button" ng-click="chiudi()">
+		<span class="glyphicon glyphicon-ok"></span>
+		Ok
+	</button>
+</div>

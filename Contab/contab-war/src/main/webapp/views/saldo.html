@@ -1,0 +1,118 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			Saldo
+        </h1>
+	</div>
+</div>
+<div ng-controller="saldoController">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<label>Saldo Corrente</label>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="row" ng-repeat="p in saldoPanels">
+						<div class="col-md-12">
+							<div class="{{p.cssClass}}">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										{{p.title}}
+									</h3>
+								</div>
+								<div class="panel-body {{p.cssBodyClass}} text-right">
+									<div>{{p.importo}} €</div>
+									<div>{{p.importoSec}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="row" ng-repeat="c in charts">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">{{c.title}}</div>
+								<div class="panel-body">
+									<canvas class="chart chart-doughnut" chart-data="c.data"
+											chart-labels="c.labels" chart-legend="true" chart-colours="c.colours">
+									</canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default" style="margin-top: 50px;">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-md-5">
+					<label for="saldoAl" style="margin-top: 7px; margin-right: 10px; float: left;">Saldo Al:</label>
+					<div name="saldoAl" class="input-group">
+						<input 
+							type="text" 
+			                   class="form-control" 
+			                   uib-datepicker-popup="dd/MM/yyyy" 
+			                   ng-model="cercaSaldoAl.al" 
+			                   is-open="cercaSaldoAl.opened" 
+			                   min-date="cercaSaldoAl.minDate" 
+			                   max-date="cercaSaldoAl.maxDate" 
+			                   datepicker-options="cercaSaldoAl.dateOptions" 
+			                   current-text="Oggi"
+			                   clear-text="Pulisci"
+			                   close-text="Chiudi" />
+						 <span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="cercaSaldoAl.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<button type="button" class="btn btn-default" ng-click="calcolaSaldoAl()" ng-disabled="cercaSaldoAl.al == null">
+						<i class="glyphicon glyphicon-dashboard"></i>
+						Calcola
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="row" ng-repeat="p in saldoAlPanels">
+						<div class="col-md-12">
+							<div class="{{p.cssClass}}">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										{{p.title}}
+									</h3>
+								</div>
+								<div class="panel-body {{p.cssBodyClass}} text-right">
+									<div>{{p.importo}} €</div>
+									<div>{{p.importoSec}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="row" ng-repeat="c in chartsAl">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">{{c.title}}</div>
+								<div class="panel-body">
+									<canvas class="chart chart-doughnut" chart-data="c.data"
+											chart-labels="c.labels" chart-legend="true" chart-colours="c.colours">
+									</canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

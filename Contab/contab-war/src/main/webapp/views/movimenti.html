@@ -1,0 +1,112 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+            Movimenti <small>Entrate/Uscite</small>
+        </h1>
+	</div>
+</div>
+<div class="row" ng-controller="cercaMovimentiController">
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Dal:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputDal" class="input-group">
+					<input 
+						type="text" 
+		                   class="form-control" 
+		                   uib-datepicker-popup="dd/MM/yyyy" 
+		                   ng-model="cm.dal" 
+		                   is-open="dal.opened" 
+		                   min-date="minDate" 
+		                   max-date="maxDate" 
+		                   datepicker-options="dal.dateOptions" 
+		                   date-disabled="dal.disabled(date, mode)" 
+		                   ng-required="true"
+		                   current-text="Oggi"
+		                   clear-text="Pulisci"
+		                   close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="dal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Al:</label>
+			</div>
+			<div class="col-md-10">
+				<div id="inputAl" class="input-group">
+					<input 
+						type="text" 
+		                   class="form-control" 
+		                   uib-datepicker-popup="dd/MM/yyyy" 
+		                   ng-model="cm.al" 
+		                   is-open="al.opened" 
+		                   min-date="minDate" 
+		                   max-date="maxDate" 
+		                   datepicker-options="al.dateOptions" 
+		                   date-disabled="al.disabled(date, mode)" 
+		                   ng-required="true"
+		                   current-text="Oggi"
+		                   clear-text="Pulisci"
+		                   close-text="Chiudi" />
+					 <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="al.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="row">
+			<div class="col-md-2">
+				<label style="margin-top: 9px;">Tipo:</label>
+			</div>
+			<div class="col-md-10">
+				<select class="form-control" ng-model="cm.dir">
+					<option ng-repeat="d in direzioneConfig.value" value="{{d.value}}">
+						{{d.label}}
+					</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<button type="button" class="btn btn-primary pull-right" ng-click="resetSearch()">
+			<span class="glyphicon glyphicon-remove"></span>
+			Reset
+		</button>
+	</div>
+	<div class="col-md-1">
+		<button type="button" class="btn btn-primary pull-right" ng-click="cercaMovimenti()">
+			<span class="glyphicon glyphicon-search"></span>
+			Cerca
+		</button>
+	</div>
+</div>
+<div class="row"><div class="col-lg-12">&nbsp;</div></div>
+<div class="row">
+	<div class="col-lg-12">
+		<div ng-controller="tabellaMovimentiController">
+			<div ui-grid="gridOptions" class="grid" ui-grid-auto-resize ng-style="getTableStyle()"></div>
+		</div> 
+	</div>
+</div>
+<div class="row"><div class="col-lg-12">&nbsp;</div></div>
+<div class="row">
+	<div class="col-lg-12">
+		<div ng-controller="nuovoMovimentoController">
+			<!-- <script type="text/ng-template" id="nuovoMovimento.html"></script> -->
+			<button type="button" class="btn btn-primary pull-right" ng-click="openNuovoMovimento()">
+				<span class="glyphicon glyphicon-plus"></span>
+				Nuovo
+			</button>
+		</div>
+	</div>
+</div>
+

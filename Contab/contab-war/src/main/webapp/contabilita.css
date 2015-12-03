@@ -1,0 +1,257 @@
+.spinner {
+	width: 100px;  
+	height: 100px;  
+	position: absolute; 
+	top: calc(50% - 70px);  
+	left: calc(50% - 50px);
+}
+
+.double-bounce1, .double-bounce2 {  
+	width: 100%;  
+	height: 100%;  
+	border-radius: 50%;  
+	background-color: #9c9;  
+	border: solid 3px #fff;  
+	opacity: 0.6; 
+	position: absolute;  
+	top: 0;  
+	left: 0;  
+	z-index: 10;    
+	-webkit-animation: bounce 2.0s infinite ease-in-out;  
+	animation: bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {  
+	-webkit-animation-delay: -1.0s;  
+	animation-delay: -1.0s;
+}
+
+@-webkit-keyframes bounce {  
+	0%, 
+	100% { 
+		-webkit-transform: scale(0.0) 
+	} 
+	50% { 
+		-webkit-transform: scale(1.0) 
+	}
+}
+
+@keyframes bounce {  
+	0%, 
+	100% {     
+		transform: scale(0.0);   
+		 -webkit-transform: scale(0.0);  
+	} 
+	50% {     
+		transform: scale(1.0);    
+		-webkit-transform: scale(1.0);  
+	}
+}
+
+form.well {  
+	position: relative;
+}
+
+.overlay {  
+	opacity: .75;  
+	background-color: #000;  
+	width: 101%;  
+	height: 96%; 
+	position: absolute;  
+	z-index: 5;  
+	margin: -20px -20px;  
+	border-radius: 3px;
+}
+
+.please-wait {  
+	text-align: center;  
+	position: absolute;  
+	top: calc(50% + 45px);  
+	left: calc(50% - 45px);  
+	color: #fff;  
+	z-index: 10;
+}
+
+.success {  
+	padding: 15px;  
+	text-align: center;  
+	border-radius: 50%;  
+	border: solid 2px #050;
+}
+
+.glyphicon-remove {  
+	cursor: pointer;
+}
+
+.uscita {
+	color: #d2322d;
+}
+.entrata {
+	color: #47a447;
+}
+.uscitaFutura{
+	color: orange;
+}
+.entrataFutura{
+	color: blue;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.panel-body-info {
+	color: #31708f;
+	background-color: #d9edf7;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.panel-c {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-success-c {
+  border-color: #5cb85c;
+}
+
+.panel-success-c > .panel-heading {
+  color: #ffffff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+.panel-success-c > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #5cb85c;
+}
+
+.panel-success-c > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #5cb85c;
+}
+
+.panel-body-success {
+	background-color: #dff0d8;
+	color: #3c763d;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.panel-warning-c {
+  border-color: #f0ad4e;
+}
+
+.panel-warning-c > .panel-heading {
+  color: #ffffff;
+  background-color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+
+.panel-warning-c > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #f0ad4e;
+}
+
+.panel-warning-c > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #f0ad4e;
+}
+
+.panel-body-warning {
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.panel-danger-c {
+  border-color: #d9534f;
+}
+
+.panel-danger-c > .panel-heading {
+  color: #ffffff;
+  background-color: #d9534f;
+  border-color: #d9534f;
+}
+
+.panel-danger-c > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #d9534f;
+}
+
+.panel-danger-c > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #d9534f;
+}
+
+.panel-body-danger {
+	color: #a94442;
+	background-color: #f2dede;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.panel-grey-c {
+  border-color: #666666;
+}
+
+.panel-grey-c > .panel-heading {
+  color: #ffffff;
+  background-color: #666666;
+  border-color: #666666;
+}
+
+.panel-grey-c > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #666666;
+}
+
+.panel-grey-c > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #666666;
+}
+
+.panel-body-grey {
+	color: #666666;
+	background-color: #cccccc;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.panel-orange-c {
+  border-color: #ff6d00;
+}
+
+.panel-orange-c > .panel-heading {
+  color: #ffffff;
+  background-color: #ff6d00;
+  border-color: #ff6d00;
+}
+
+.panel-orange-c > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #ff6d00;
+}
+
+.panel-orange-c > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #ff6d00;
+}
+
+.panel-body-orange {
+	color: #ff6d00;
+	background-color: #ffd6b7;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}

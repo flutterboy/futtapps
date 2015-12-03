@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="contabilita" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="contabilita" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="contabilita" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="contabilita" class="no-js"> <!--<![endif]-->
+	<head>
+		
+		<title>Contabilit&agrave;</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		<link rel="stylesheet" href="jslib/html5-boilerplate/dist/css/normalize.css">
+		<link rel="stylesheet" href="jslib/html5-boilerplate/dist/css/main.css">
+		<link href="jslib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="sb-template/css/sb-admin.css" rel="stylesheet">
+		<link rel="stylesheet" href="jslib/angular-ui-grid/ui-grid.css" type="text/css">
+		<link rel="stylesheet" href="jslib/angular-chart.js/dist/angular-chart.css" type="text/css">
+		<link href="sb-template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="contabilita.css">
+		
+		<style type="text/css">
+  			.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+  		</style>
+		
+		<script src="jslib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+		<script src="jslib/angular/angular.js"></script>
+		<script src="jslib/angular-ui-router/release/angular-ui-router.js"></script>
+		<script src="jslib/angular-animate/angular-animate.js"></script>
+		<script src="jslib/angular-resource/angular-resource.js"></script>
+		<script src="jslib/angular-ui-grid/ui-grid.js"></script>
+		<script src="jslib/angular-spinners/dist/angular-spinners.js"></script>
+		<script src="jslib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script src="jslib/Chart.js/Chart.js"></script>
+		<script src="jslib/angular-chart.js/dist/angular-chart.js"></script>
+		<script src="jslib/underscore/underscore.js"></script>
+		<script src="sb-template/js/jquery.js"></script>
+		
+		<script src="jslib/ng-pdfviewer/lib/pdf.js"></script>
+		<script src="jslib/ng-pdfviewer/lib/compatibility.js"></script>
+		<script src="jslib/ng-pdfviewer/lib/pdf.worker.js"></script>
+		<script src="jslib/ng-pdfviewer/ng-pdfviewer.js"></script>
+		
+		<script src="contabUtils.js"></script>
+		
+		<script src="views/riepilogo.js"></script>
+		<script src="views/saldo.js"></script>
+		<script src="views/movimenti.js"></script>
+		<script src="views/statistiche.js"></script>
+		<script src="views/config.js"></script>
+		<script src="app.js"></script>
+		
+	</head>
+	
+	<body ng-controller="appController">
+		<spinner name="waitSpinner" ng-cloak="">
+			<div class="overlay"></div>
+			<div class="spinner">
+				<div class="double-bounce1"></div>
+				<div class="double-bounce2"></div>
+			</div>
+			<div class="please-wait">Attendi...</div>
+		</spinner>
+		
+		<div>
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">Li Sordi</a>
+				</div>
+				<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav nav-pills">
+						<li ng-repeat="section in sections">
+							<a ui-sref="{{section.route}}">
+								<i class="fa fa-fw fa-{{section.cssClass}}"></i> 
+								{{section.title}}
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+			
+			<div id="page-wrapper" ui-view class="container-fluid">
+	
+	        </div>
+	        <!-- /#page-wrapper -->
+		</div>
+		<!-- /#wrapper -->
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<div ng-controller="statisticheController">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Statistiche
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <uib-tabset justified="true" type="pills">
+                <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+                    <div ng-include="tab.templateUrl"></div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+</div>
