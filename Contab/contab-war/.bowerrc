@@ -1,0 +1,5 @@
+{
+	"proxy":"http://gabnegro:li9gt4e3@10.211.1.1:8080",
+	"https_proxy":"http://gabnegro:li9gt4e3@10.211.1.1:8080",
+	"directory": "target/contab-war/jslib"
+}

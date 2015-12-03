@@ -1,0 +1,39 @@
+{
+  "name": "contab-war",
+  "description": "contabilita'",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "nonsaprei"
+  ],
+  "authors": [
+    "Gabriele Negro"
+  ],
+  "license": "MIT",
+  "homepage": "www.sticazzi.it",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-bootstrap": "~0.14.3",
+    "angular-route": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "angular-ui-grid": "~3.0.7",
+    "angular-loader": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-animate": "~1.4.7",
+    "angular-spinners": "~3.0.3",
+    "angular-chart.js": "~0.8.5",
+    "html5-boilerplate": "~5.2.0",
+    "bootstrap": "~3.1.1",
+    "underscore": "~1.8.3",
+    "ng-pdfviewer": "~0.2.1",
+    "jquery": "~2.1.4"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
