@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+ 
+    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+     
+    <!-- Enables the Spring MVC @Controller programming model -->
+    <annotation-driven  conversion-service="conversionService"/>
+
+    <beans:bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<beans:property name="formatters">
+			<beans:set>
+				<beans:bean class="it.negro.contab.converter.DateTimeArgumentAnnotationFormatterFactory" />
+			</beans:set>
+		</beans:property>
+	</beans:bean>
+ 
+    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+    <!-- <resources mapping="/resources/**" location="/resources/" /> -->
+ 
+    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+    <!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="prefix" value="/WEB-INF/views/" />
+        <beans:property name="suffix" value=".jsp" />
+    </beans:bean> -->
+     
+    <!-- Configure to plugin JSON as request and response in method handler -->
+    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <beans:property name="messageConverters">
+            <beans:list>
+                <beans:ref bean="jsonMessageConverter"/>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+     
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="defaultEncoding" value="utf-8" />
+        <beans:property name="maxUploadSize" value="500000" />
+    </beans:bean>
+     
+    <!-- Configure bean to convert JSON to POJO and vice versa -->
+    <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+    
+    <beans:bean id="mongoFactory" class="it.negro.contab.mongo.SpringMongoDbFactoryGridFs"> <!-- it.negro.contab.mongo.ContabMongoDBFactory -->
+    	<beans:property name="host" value="127.0.0.1" />
+    	<beans:property name="port" value="27017" />
+    	<beans:property name="user" value="gabriele" />
+    	<beans:property name="password" value="gabriele" />
+    	<beans:property name="db" value="testdb" />
+	</beans:bean>
+    
+    <beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<beans:constructor-arg index="0" ref="mongoFactory" />
+	</beans:bean>
+    
+    <beans:bean name="gridFsFactory" class="it.negro.contab.mongo.ContabGridFsFactory">
+		<beans:constructor-arg ref="mongoFactory" />
+	</beans:bean>
+    
+    <beans:bean id="movimentoContabileRepository" class="it.negro.contab.repository.MovimentoContabileRepository">
+		<beans:property name="mongo" ref="mongoTemplate" />
+		<beans:property name="counterRepository" ref="counterRepository" />
+	</beans:bean>
+	
+	<beans:bean id="configRepository" class="it.negro.contab.repository.ConfigRepository">
+		<beans:property name="mongo" ref="mongoTemplate" />
+	</beans:bean>
+	
+	<beans:bean id="saldoRepository" class="it.negro.contab.repository.SaldoRepository">
+		<beans:property name="mongo" ref="mongoTemplate" />
+	</beans:bean>
+	
+	<beans:bean id="fileRepository" class="it.negro.contab.repository.FileRepository">
+		<beans:property name="gridFsFactory" ref="gridFsFactory" />
+	</beans:bean>
+	
+	<beans:bean id="counterRepository" class="it.negro.contab.repository.CounterRepository">
+		<beans:property name="mongo" ref="mongoTemplate" />
+	</beans:bean>
+    
+    <beans:bean id="contabService" class="it.negro.contab.service.ContabService">
+		<beans:property name="movimentoContabileRepository" ref="movimentoContabileRepository" />
+		<!-- <beans:property name="fileRepository" ref="fileRepository" /> -->
+	</beans:bean>
+
+	<beans:bean id="contabConfigService" class="it.negro.contab.service.ContabConfigService">
+		<beans:property name="configRepository" ref="configRepository" />
+	</beans:bean>  
+	   
+    <context:component-scan base-package="it.negro.contab.service" />
+     
+</beans:beans>
