@@ -6,17 +6,21 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.style.TextAppearanceSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import it.negro.contabilitapp.entity.MovimentoContabile;
 import it.negro.contabilitapp.remote.RemoteContabService;
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,7 +43,7 @@ public class MovimentiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movimenti, container, false);
         this.movimentiTable = (TableLayout) view.findViewById(R.id.movimentiGrid);
-        //new GetMovimentiAsyncToken(this).execute(null, null);
+        new GetMovimentiAsyncToken(this).execute(null, null);
         return view;
     }
 
@@ -115,58 +119,59 @@ public class MovimentiFragment extends Fragment {
     private void buildTable(View view, List<MovimentoContabile> ms){
         movimentiTable.removeAllViews();
         TableRow tr = new TableRow(view.getContext());
-        tr.setBackgroundColor(Color.parseColor("#ff800a"));
-        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tr.setGravity(Gravity.CENTER_VERTICAL);
 
-        TextView data = buildMovimentiGridCell("Data", 270, 40, true, view.getContext());
-        tr.addView(data, 750, 100);
+        addToRow(tr, "Data", "header");
+        addToRow(tr, "Descrizione", "header");
+        addToRow(tr, "Importo", "header");
 
-        TextView descrizione = buildMovimentiGridCell("Descrizione", -1, -1, true, view.getContext());
-        tr.addView(descrizione);
-
-        TextView importo = buildMovimentiGridCell("Importo", 250, 40, true, view.getContext());
-        tr.addView(importo, 710, 100);
-
-        movimentiTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        movimentiTable.addView(tr);
 
         int i = 0;
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         for (MovimentoContabile m : ms){
             tr = new TableRow(view.getContext());
-            if (i % 2 == 0)
+            /*if (i % 2 == 0)
                 tr.setBackgroundColor(Color.parseColor("#b4ff800a"));
             else
-                tr.setBackgroundColor(Color.parseColor("#64ff800a"));
-            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tr.setBackgroundColor(Color.parseColor("#64ff800a"));*/
+            String tipo = "entrata";
+            if (m.getDirezione().equals("USCITA"))
+                tipo = "uscita";
+            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            tr.setGravity(Gravity.CENTER_VERTICAL);
 
-            data = buildMovimentiGridCell(format.format(m.getData()), 270, 40, false, view.getContext());
-            tr.addView(data, 750, 100);
+            addToRow(tr, format.format(m.getData()), tipo);
+            addToRow(tr, m.getDescrizione(), tipo);
+            addToRow(tr, String.valueOf(m.getImporto()), tipo);
 
-            descrizione = buildMovimentiGridCell(m.getDescrizione().trim(), -1, -1, false, view.getContext());
-            tr.addView(descrizione);
-
-            importo = buildMovimentiGridCell(String.valueOf(m.getImporto()), 250, 40, false, view.getContext());
-            tr.addView(importo, 710, 100);
-
-            movimentiTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            movimentiTable.addView(tr);
             i += 1;
         }
-
     }
 
-    private TextView buildMovimentiGridCell(String title, int w, int h, boolean header, Context c){
-        TextView tv = new TextView(c);
+    private void addToRow (TableRow row, String title, String tipo){
+        TextView tv = new TextView(getView().getContext());
+        row.addView(tv);
         tv.setText(title);
-        tv.setTextColor(Color.BLACK);
-        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        if (w != -1)
-            tv.setMinimumWidth(w);
-        if (h != -1)
-            tv.setMinimumHeight(h);
-        tv.setTextSize(15);
-        if (header)
+        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv.setGravity(Gravity.CENTER_VERTICAL);
+        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tv.setTextAppearance(getView().getContext(), android.R.style.TextAppearance_Medium);
+        if (tipo.equals("header")) {
+            tv.setTextColor(Color.GRAY);
             tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        return tv;
+            tv.setHeight(100);
+        }else{
+            tv.setPadding(10, 10, 10, 10);
+            tv.setTextSize(15);
+            tv.setMinimumHeight(75);
+            if (tipo.equals("entrata"))
+                tv.setTextColor(Color.GREEN);
+            else if (tipo.equals("uscita"))
+                tv.setTextColor(Color.RED);
+        }
     }
 
 }
