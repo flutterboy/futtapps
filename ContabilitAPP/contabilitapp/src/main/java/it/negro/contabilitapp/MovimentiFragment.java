@@ -30,6 +30,7 @@ import java.util.*;
 public class MovimentiFragment extends Fragment {
 
     private TableLayout movimentiTable;
+    private ScrollView scrollView;
     private static final int REQ_CODE_SPEECH_INPUT = 100;
 
     public static MovimentiFragment newInstance() {
@@ -42,7 +43,8 @@ public class MovimentiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movimenti, container, false);
-        this.movimentiTable = (TableLayout) view.findViewById(R.id.movimentiGrid);
+        //this.movimentiTable = (TableLayout) view.findViewById(R.id.movimentiGrid);
+        this.scrollView = (ScrollView) view.findViewById(R.id.movimentiView);
         new GetMovimentiAsyncToken(this).execute(null, null);
         return view;
     }
@@ -113,10 +115,89 @@ public class MovimentiFragment extends Fragment {
     public void onMovimentiTrovati(List<MovimentoContabile> m){
         if (m == null || m.size() == 0)
             return;
-        buildTable(getView(), m);
+        //buildTable(getView(), m);
+        buildView(m);
     }
 
-    private void buildTable(View view, List<MovimentoContabile> ms){
+    private void buildView(List<MovimentoContabile> movimenti){
+        scrollView.removeAllViews();
+        Context ctx = getView().getContext();
+        LinearLayout mainBox = new LinearLayout(ctx);
+        scrollView.addView(mainBox);
+        mainBox.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        mainBox.setOrientation(LinearLayout.VERTICAL);
+        MovimentoContabile movimento = null;
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        for (int i = 0; i < movimenti.size(); i++){
+            movimento = movimenti.get(i);
+            int textColor = 0;
+            if (movimento.getDirezione().equals("ENTRATA"))
+                textColor = Color.parseColor("#C8008000");
+            else
+                textColor =  Color.parseColor("#C8800000");
+            LinearLayout box = new LinearLayout(ctx);
+            mainBox.addView(box);
+            box.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            box.setOrientation(LinearLayout.VERTICAL);
+            if (i % 2 == 0)
+                box.setBackgroundColor(Color.parseColor("#82010101"));
+            else
+                box.setBackgroundColor(Color.parseColor("#A0010101"));
+
+            LinearLayout row1 = new LinearLayout(ctx);
+            box.addView(row1);
+            row1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            row1.setOrientation(LinearLayout.HORIZONTAL);
+            row1.setWeightSum(100);
+
+            TextView dataTv = new TextView(ctx);
+            row1.addView(dataTv);
+            dataTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 35));
+            dataTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
+            dataTv.setTextSize(20);
+            dataTv.setTextColor(textColor);
+            dataTv.setText(format.format(movimento.getData()));
+            dataTv.setPadding(10,20,10,10);
+
+            TextView direzioneTv = new TextView(ctx);
+            row1.addView(direzioneTv);
+            direzioneTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 65));
+            direzioneTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
+            direzioneTv.setGravity(Gravity.RIGHT);
+            direzioneTv.setTextSize(20);
+            direzioneTv.setTextColor(textColor);
+            direzioneTv.setText(movimento.getTarget());
+            direzioneTv.setPadding(10,20,10,10);
+
+            LinearLayout row2 = new LinearLayout(ctx);
+            box.addView(row2);
+            row2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            row2.setOrientation(LinearLayout.HORIZONTAL);
+            row2.setWeightSum(100);
+
+            TextView descrizioneTv = new TextView(ctx);
+            row2.addView(descrizioneTv);
+            descrizioneTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 60));
+            descrizioneTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
+            descrizioneTv.setTextSize(18);
+            descrizioneTv.setTextColor(textColor);
+            descrizioneTv.setText(movimento.getDescrizione());
+            descrizioneTv.setPadding(10,10,10,20);
+
+            TextView importoTv = new TextView(ctx);
+            row2.addView(importoTv);
+            importoTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 40));
+            importoTv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+            importoTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
+            importoTv.setTextSize(25);
+            importoTv.setTextColor(textColor);
+            importoTv.setText(String.valueOf(movimento.getImporto()));
+            importoTv.setPadding(5,5,5,20);
+
+        }
+    }
+
+    /*private void buildTable(View view, List<MovimentoContabile> ms){
         movimentiTable.removeAllViews();
         TableRow tr = new TableRow(view.getContext());
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -132,10 +213,10 @@ public class MovimentiFragment extends Fragment {
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         for (MovimentoContabile m : ms){
             tr = new TableRow(view.getContext());
-            /*if (i % 2 == 0)
+            if (i % 2 == 0)
                 tr.setBackgroundColor(Color.parseColor("#b4ff800a"));
             else
-                tr.setBackgroundColor(Color.parseColor("#64ff800a"));*/
+                tr.setBackgroundColor(Color.parseColor("#64ff800a"));
             String tipo = "entrata";
             if (m.getDirezione().equals("USCITA"))
                 tipo = "uscita";
@@ -172,6 +253,6 @@ public class MovimentiFragment extends Fragment {
             else if (tipo.equals("uscita"))
                 tv.setTextColor(Color.RED);
         }
-    }
+    }*/
 
 }
