@@ -29,7 +29,6 @@ import java.util.*;
 
 public class MovimentiFragment extends Fragment {
 
-    private TableLayout movimentiTable;
     private ScrollView scrollView;
     private static final int REQ_CODE_SPEECH_INPUT = 100;
 
@@ -43,7 +42,6 @@ public class MovimentiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movimenti, container, false);
-        //this.movimentiTable = (TableLayout) view.findViewById(R.id.movimentiGrid);
         this.scrollView = (ScrollView) view.findViewById(R.id.movimentiView);
         new GetMovimentiAsyncToken(this).execute(null, null);
         return view;
@@ -196,63 +194,5 @@ public class MovimentiFragment extends Fragment {
 
         }
     }
-
-    /*private void buildTable(View view, List<MovimentoContabile> ms){
-        movimentiTable.removeAllViews();
-        TableRow tr = new TableRow(view.getContext());
-        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tr.setGravity(Gravity.CENTER_VERTICAL);
-
-        addToRow(tr, "Data", "header");
-        addToRow(tr, "Descrizione", "header");
-        addToRow(tr, "Importo", "header");
-
-        movimentiTable.addView(tr);
-
-        int i = 0;
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        for (MovimentoContabile m : ms){
-            tr = new TableRow(view.getContext());
-            if (i % 2 == 0)
-                tr.setBackgroundColor(Color.parseColor("#b4ff800a"));
-            else
-                tr.setBackgroundColor(Color.parseColor("#64ff800a"));
-            String tipo = "entrata";
-            if (m.getDirezione().equals("USCITA"))
-                tipo = "uscita";
-            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-            tr.setGravity(Gravity.CENTER_VERTICAL);
-
-            addToRow(tr, format.format(m.getData()), tipo);
-            addToRow(tr, m.getDescrizione(), tipo);
-            addToRow(tr, String.valueOf(m.getImporto()), tipo);
-
-            movimentiTable.addView(tr);
-            i += 1;
-        }
-    }
-
-    private void addToRow (TableRow row, String title, String tipo){
-        TextView tv = new TextView(getView().getContext());
-        row.addView(tv);
-        tv.setText(title);
-        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv.setGravity(Gravity.CENTER_VERTICAL);
-        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tv.setTextAppearance(getView().getContext(), android.R.style.TextAppearance_Medium);
-        if (tipo.equals("header")) {
-            tv.setTextColor(Color.GRAY);
-            tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-            tv.setHeight(100);
-        }else{
-            tv.setPadding(10, 10, 10, 10);
-            tv.setTextSize(15);
-            tv.setMinimumHeight(75);
-            if (tipo.equals("entrata"))
-                tv.setTextColor(Color.GREEN);
-            else if (tipo.equals("uscita"))
-                tv.setTextColor(Color.RED);
-        }
-    }*/
 
 }
