@@ -1,0 +1,134 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="it.negro.contabilitapp.MovimentoActivity">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:id="@+id/movimentoView">
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/activity_vertical_margin"
+                        android:paddingBottom="@dimen/activity_vertical_margin">
+
+            <TextView
+                    android:text="Dettaglio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data"
+                    android:id="@+id/textView"
+                    android:layout_marginTop="30dp"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/tv"
+                    android:layout_alignParentLeft="true"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dataMovimento"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentLeft="true"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Direzione"
+                    android:id="@+id/textView2"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/dataMovimento"
+                    android:layout_alignParentLeft="true"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/direzioneMovimento"
+                    android:layout_below="@+id/textView2"
+                    android:layout_alignParentLeft="true"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Importo"
+                    android:id="@+id/textView3"
+                    android:textStyle="bold"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/targetMovimento"
+                    android:layout_marginTop="20dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/importoMovimento"
+                    android:layout_below="@+id/textView3"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Descrizione"
+                    android:id="@+id/textView4"
+                    android:textStyle="bold"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/importoMovimento"
+                    android:layout_marginTop="20dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/descrizioneMovimento"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textView4"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Documento"
+                    android:id="@+id/textView5"
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignParentLeft="false"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/descrizioneMovimento"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Target"
+                    android:id="@+id/textView6"
+                    android:textStyle="bold"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/direzioneMovimento"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/targetMovimento"
+                    android:layout_below="@+id/textView6"
+                    android:layout_alignParentLeft="true"/>
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/documentoImageView"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textView5"/>
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
