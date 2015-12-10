@@ -22,6 +22,7 @@ import it.negro.contabilitapp.entity.MovimentoContabile;
 import it.negro.contabilitapp.remote.RemoteContabService;
 import org.w3c.dom.Text;
 
+import javax.xml.datatype.Duration;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -124,74 +125,81 @@ public class MovimentiFragment extends Fragment {
         scrollView.addView(mainBox);
         mainBox.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
         mainBox.setOrientation(LinearLayout.VERTICAL);
-        MovimentoContabile movimento = null;
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        MovimentoContabile movimento = null;
         for (int i = 0; i < movimenti.size(); i++){
             movimento = movimenti.get(i);
-            int textColor = 0;
-            if (movimento.getDirezione().equals("ENTRATA"))
-                textColor = Color.parseColor("#C8008000");
-            else
-                textColor =  Color.parseColor("#C8800000");
+            int textColor = Color.parseColor("#FF232323");
             LinearLayout box = new LinearLayout(ctx);
             mainBox.addView(box);
+            box.setOnClickListener(new DettaglioMovimentoListener(movimento, this));
             box.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
             box.setOrientation(LinearLayout.VERTICAL);
             if (i % 2 == 0)
-                box.setBackgroundColor(Color.parseColor("#82010101"));
+                box.setBackgroundColor(Color.parseColor("#d7d7d7"));
             else
-                box.setBackgroundColor(Color.parseColor("#A0010101"));
+                box.setBackgroundColor(Color.parseColor("#9b9b9b"));
 
-            LinearLayout row1 = new LinearLayout(ctx);
-            box.addView(row1);
-            row1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-            row1.setOrientation(LinearLayout.HORIZONTAL);
-            row1.setWeightSum(100);
+            LinearLayout row = new LinearLayout(ctx);
+            box.addView(row);
+            row.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setWeightSum(100);
 
             TextView dataTv = new TextView(ctx);
-            row1.addView(dataTv);
-            dataTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 35));
-            dataTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
-            dataTv.setTextSize(20);
+            row.addView(dataTv);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 28);
+            layoutParams.gravity = Gravity.CENTER_VERTICAL;
+            dataTv.setLayoutParams(layoutParams);
+            dataTv.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            dataTv.setTextSize(14);
             dataTv.setTextColor(textColor);
             dataTv.setText(format.format(movimento.getData()));
-            dataTv.setPadding(10,20,10,10);
-
-            TextView direzioneTv = new TextView(ctx);
-            row1.addView(direzioneTv);
-            direzioneTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 65));
-            direzioneTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
-            direzioneTv.setGravity(Gravity.RIGHT);
-            direzioneTv.setTextSize(20);
-            direzioneTv.setTextColor(textColor);
-            direzioneTv.setText(movimento.getTarget());
-            direzioneTv.setPadding(10,20,10,10);
-
-            LinearLayout row2 = new LinearLayout(ctx);
-            box.addView(row2);
-            row2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-            row2.setOrientation(LinearLayout.HORIZONTAL);
-            row2.setWeightSum(100);
+            dataTv.setPadding(10,10,10,10);
 
             TextView descrizioneTv = new TextView(ctx);
-            row2.addView(descrizioneTv);
-            descrizioneTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 60));
-            descrizioneTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
-            descrizioneTv.setTextSize(18);
+            row.addView(descrizioneTv);
+            layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 45);
+            layoutParams.gravity = Gravity.CENTER_VERTICAL;
+            descrizioneTv.setLayoutParams(layoutParams);
+            descrizioneTv.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            descrizioneTv.setTextSize(15);
             descrizioneTv.setTextColor(textColor);
             descrizioneTv.setText(movimento.getDescrizione());
-            descrizioneTv.setPadding(10,10,10,20);
+            descrizioneTv.setPadding(10,10,10,10);
 
+            String importo = String.valueOf(movimento.getImporto()) + " €";
+            if (movimento.getDirezione().equals("USCITA"))
+                importo = "- " + importo;
             TextView importoTv = new TextView(ctx);
-            row2.addView(importoTv);
-            importoTv.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 40));
-            importoTv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            importoTv.setTypeface(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
-            importoTv.setTextSize(25);
+            row.addView(importoTv);
+            layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 28);
+            layoutParams.gravity = Gravity.CENTER_VERTICAL;
+            importoTv.setLayoutParams(layoutParams);
+            importoTv.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            importoTv.setTextSize(15);
             importoTv.setTextColor(textColor);
             importoTv.setText(String.valueOf(movimento.getImporto()));
-            importoTv.setPadding(5,5,5,20);
+            importoTv.setPadding(10,10,10,10);
 
+        }
+    }
+
+    public static class DettaglioMovimentoListener implements View.OnClickListener {
+
+        private MovimentoContabile movimentoContabile;
+        private Fragment fragment;
+
+        public DettaglioMovimentoListener(MovimentoContabile movimento, Fragment fragment){
+            this.movimentoContabile = movimento;
+            this.fragment = fragment;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(fragment.getActivity(), MovimentoActivity.class);
+            intent.putExtra("movimento", movimentoContabile);
+            fragment.startActivity(intent);
         }
     }
 

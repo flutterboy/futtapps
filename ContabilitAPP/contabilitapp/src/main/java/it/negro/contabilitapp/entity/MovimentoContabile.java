@@ -1,9 +1,10 @@
 package it.negro.contabilitapp.entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MovimentoContabile {
+public class MovimentoContabile implements Serializable {
     private Integer id;
     private Integer idPadre;
     private Date data;

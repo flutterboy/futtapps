@@ -16,6 +16,8 @@ import org.apache.http.protocol.HttpContext;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class RemoteContabService {
@@ -35,9 +37,18 @@ public class RemoteContabService {
     }
 
     public List<MovimentoContabile> getMovimenti(Date dal, Date al){
+
         List<MovimentoContabile> result = new ArrayList<MovimentoContabile>();
         try {
-            HttpResponse response = get("getAllMovimenti");
+            DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            String da = "x";
+            if (dal != null)
+                da = format.format(dal);
+            String a = format.format(new Date());
+            if(al != null)
+                a = format.format(al);
+            String url = "getMovimenti/" + da + "/" + a;
+            HttpResponse response = get(url);
             String jsonResult = toJson(response);
             result = (List<MovimentoContabile>) fromJsonArray(jsonResult, MovimentoContabile.class);
         }catch(Exception e){
@@ -73,6 +84,7 @@ public class RemoteContabService {
             if (n > 0)
                 out.append(new String(b, 0, n));
         }
+        
         return out.toString();
     }
 

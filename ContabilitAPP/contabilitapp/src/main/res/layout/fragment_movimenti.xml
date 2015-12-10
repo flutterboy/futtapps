@@ -10,7 +10,7 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="5"
             android:visibility="visible"
             android:id="@+id/movimentiView">
@@ -24,76 +24,250 @@
 
         </TableLayout-->
 
-        <LinearLayout
+        <!--LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#b5690600">
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#b5690600">
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="1"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="01/01/2016"
+                            android:id="@+id/textView3"
+                            android:layout_weight=".35"
+                            android:textSize="18dp"
+                            android:padding="10dp"
+                            android:textColor="#232323"/>
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="CONTO_CORRENTE"
+                            android:id="@+id/textView4"
+                            android:layout_weight="0.65"
+                            android:textStyle="bold|italic"
+                            android:textSize="20dp"
+                            android:padding="10dp"
+                            android:gravity="right"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="Pagamento concerto chris cornel con carta di credito da conto corrente"
+                            android:id="@+id/textView"
+                            android:layout_weight=".60"
+                            android:textStyle="bold|italic"
+                            android:textSize="18dp"
+                            android:padding="10dp"/>
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="193463,71 €"
+                            android:id="@+id/textView2"
+                            android:layout_weight=".40"
+                            android:textStyle="bold"
+                            android:textSize="25dp"
+                            android:textAlignment="gravity"
+                            android:padding="5dp"
+                            android:gravity="center_vertical|center_horizontal"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
 
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:weightSum="1"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="#9b9b9b">
 
                 <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="01/01/2016"
-                        android:id="@+id/textView3"
-                        android:layout_weight=".35"
-                        android:textStyle="bold|italic"
-                        android:textSize="20dp"
-                        android:padding="10dp"/>
+                        android:id="@+id/textViewx"
+                        android:layout_weight=".28"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:textColor="#232323"
+                        android:gravity="center_vertical|right"/>
 
                 <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="CONTO_CORRENTE"
-                        android:id="@+id/textView4"
-                        android:layout_weight="0.65"
-                        android:textStyle="bold|italic"
-                        android:textSize="20dp"
+                        android:id="@+id/textViewy"
+                        android:layout_weight="0.45"
+                        android:textSize="15dp"
                         android:padding="10dp"
-                        android:gravity="right"/>
+                        android:gravity="center_vertical|center_horizontal"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="193463,71 €"
+                        android:id="@+id/textViewz"
+                        android:layout_weight="0.27"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:gravity="center_vertical|right"/>
             </LinearLayout>
 
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="#d7d7d7">
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="01/01/2016"
+                            android:id="@+id/textViewx1"
+                            android:layout_weight=".28"
+                            android:textSize="15dp"
+                            android:padding="10dp"
+                            android:textColor="#232323"
+                            android:gravity="center_vertical|right"/>
 
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="CONTO_CORRENTE"
+                            android:id="@+id/textViewy1"
+                            android:layout_weight="0.45"
+                            android:textSize="15dp"
+                            android:padding="10dp"
+                            android:gravity="center_vertical|center_horizontal"/>
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="193463,71 €"
+                            android:id="@+id/textViewz1"
+                            android:layout_weight="0.27"
+                            android:textSize="15dp"
+                            android:padding="10dp"
+                            android:gravity="center_vertical|right"/>
+                </LinearLayout-->
+
+            <!--LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#9b9b9b"
+                    android:gravity="fill_horizontal">
                 <TextView
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Pagamento concerto chris cornel con carta di credito da conto corrente"
-                        android:id="@+id/textView"
-                        android:layout_weight=".60"
-                        android:textStyle="bold|italic"
-                        android:textSize="18dp"
-                        android:padding="10dp"/>
+                        android:text="01/01/2016"
+                        android:id="@+id/textViewx2"
+                        android:layout_weight=".20"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:textColor="#232323"
+                        android:gravity="center_vertical|right"
+                        android:layout_gravity="center_vertical"/>
 
                 <TextView
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="ASDFA sDGASDG ADFHSDH ADFHADFHS"
+                        android:id="@+id/textViewy2"
+                        android:layout_weight="0.70"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:gravity="center_vertical"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="193463,71 €"
-                        android:id="@+id/textView2"
-                        android:layout_weight=".40"
-                        android:textStyle="bold"
-                        android:textSize="25dp"
-                        android:textAlignment="gravity"
-                        android:padding="5dp"
+                        android:id="@+id/textViewz2"
+                        android:layout_weight=".20"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:gravity="center_vertical|right"
+                        android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#d7d7d7">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="01/01/2016"
+                        android:id="@+id/textViewx3"
+                        android:layout_weight=".28"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:textColor="#232323"
+                        android:gravity="center_vertical|right"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="CONTO_CORRENTE"
+                        android:id="@+id/textViewy3"
+                        android:layout_weight="0.45"
+                        android:textSize="15dp"
+                        android:padding="10dp"
                         android:gravity="center_vertical|center_horizontal"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="193463,71 €"
+                        android:id="@+id/textViewz3"
+                        android:layout_weight="0.27"
+                        android:textSize="15dp"
+                        android:padding="10dp"
+                        android:gravity="center_vertical|right"/>
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout-->
+
     </ScrollView>
 
 </LinearLayout>
