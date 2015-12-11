@@ -29,6 +29,30 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".HomeActivity"
+                android:label="@string/title_activity_home"
+                android:parentActivityName=".MainActivity" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="it.negro.contabilitapp.MainActivity" />
+        </activity>
+        <activity
+                android:name=".SaldoActivity"
+                android:label="@string/title_activity_saldo"
+                android:parentActivityName=".MainActivity" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="it.negro.contabilitapp.MainActivity" />
+        </activity>
+        <activity
+                android:name=".MovimentiActivity"
+                android:label="@string/title_activity_movimenti"
+                android:parentActivityName=".MainActivity" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="it.negro.contabilitapp.MainActivity" />
+        </activity>
+        <activity
             android:name=".MovimentoActivity"
             android:label="@string/title_activity_movimento"
             android:parentActivityName=".MainActivity" >

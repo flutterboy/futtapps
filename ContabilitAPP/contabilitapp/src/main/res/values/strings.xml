@@ -18,6 +18,9 @@
     <string name="speech_not_supported">Spiacente! Il tuo device non supporta lo speech input</string>
     <string name="speech_prompt">Parla&#8230;</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_saldo">Saldo</string>
+    <string name="title_activity_movimenti">Movimenti</string>
     <string name="title_activity_movimento">Movimento</string>
 
     <string name="hello_world">Hello world!</string>

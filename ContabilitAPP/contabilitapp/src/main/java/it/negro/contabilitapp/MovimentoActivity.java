@@ -3,11 +3,8 @@ package it.negro.contabilitapp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import it.negro.contabilitapp.entity.MovimentoContabile;
@@ -15,7 +12,7 @@ import it.negro.contabilitapp.entity.MovimentoContabile;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class MovimentoActivity extends AppCompatActivity {
+public class MovimentoActivity extends MainActivity {
 
     private MovimentoContabile movimentoContabile;
 
@@ -38,7 +35,7 @@ public class MovimentoActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_movimento, menu);
         return true;
@@ -50,7 +47,15 @@ public class MovimentoActivity extends AppCompatActivity {
         if (id == R.id.action_settings)
             return true;
         return super.onOptionsItemSelected(item);
+    }*/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

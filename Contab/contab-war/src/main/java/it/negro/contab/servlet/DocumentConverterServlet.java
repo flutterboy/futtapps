@@ -74,6 +74,13 @@ public class DocumentConverterServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (true) {
+
+        }
+    }
+
     public static class DocumentFile {
         private byte[] file;
         private String name;

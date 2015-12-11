@@ -47,7 +47,7 @@ public class RemoteContabService {
             String a = format.format(new Date());
             if(al != null)
                 a = format.format(al);
-            String url = "getMovimenti/" + da + "/" + a;
+            String url = "getAllMovimenti"; ///" + da + "/" + a;
             HttpResponse response = get(url);
             String jsonResult = toJson(response);
             result = (List<MovimentoContabile>) fromJsonArray(jsonResult, MovimentoContabile.class);

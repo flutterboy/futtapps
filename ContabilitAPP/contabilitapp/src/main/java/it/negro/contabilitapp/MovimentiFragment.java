@@ -6,13 +6,10 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.text.style.TextAppearanceSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +17,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import it.negro.contabilitapp.entity.MovimentoContabile;
 import it.negro.contabilitapp.remote.RemoteContabService;
-import org.w3c.dom.Text;
 
-import javax.xml.datatype.Duration;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -40,15 +35,15 @@ public class MovimentiFragment extends Fragment {
         return fragment;
     }
 
-    @Override
+    /*@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movimenti, container, false);
         this.scrollView = (ScrollView) view.findViewById(R.id.movimentiView);
         new GetMovimentiAsyncToken(this).execute(null, null);
         return view;
-    }
+    }*/
 
-    public void promptSpeech (){
+    /*public void promptSpeech (){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -75,9 +70,9 @@ public class MovimentiFragment extends Fragment {
             default:
                 break;
         }
-    }
+    }*/
 
-    private static class GetMovimentiAsyncToken extends AsyncTask<Object, List<MovimentoContabile>, List<MovimentoContabile>> {
+    /*private static class GetMovimentiAsyncToken extends AsyncTask<Object, List<MovimentoContabile>, List<MovimentoContabile>> {
 
         private ProgressDialog progressDialog;
 
@@ -179,7 +174,7 @@ public class MovimentiFragment extends Fragment {
             importoTv.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
             importoTv.setTextSize(15);
             importoTv.setTextColor(textColor);
-            importoTv.setText(String.valueOf(movimento.getImporto()));
+            importoTv.setText(importo);
             importoTv.setPadding(10,10,10,10);
 
         }
@@ -201,6 +196,6 @@ public class MovimentiFragment extends Fragment {
             intent.putExtra("movimento", movimentoContabile);
             fragment.startActivity(intent);
         }
-    }
+    }*/
 
 }

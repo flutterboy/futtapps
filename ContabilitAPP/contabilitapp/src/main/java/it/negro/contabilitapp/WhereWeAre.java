@@ -6,6 +6,7 @@ public class WhereWeAre {
 
     public static final String HOME = "riepilogo";
     public static final String MOVIMENTI = "movimenti";
+    public static final String DETTAGLIO_MOVIMENTO = "dettaglioMovimento";
     public static final String SALDO = "saldo";
     public static final String NOWHERE = "nowhere";
 
@@ -21,7 +22,7 @@ public class WhereWeAre {
         instance.place = place;
     }
 
-    public static boolean is(String place){
+    public static boolean isIn(String place){
         return place.equals(instance.place);
     }
 
