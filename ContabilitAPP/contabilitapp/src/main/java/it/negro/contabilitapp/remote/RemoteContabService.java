@@ -36,22 +36,27 @@ public class RemoteContabService {
                 .create();
     }
 
-    public List<MovimentoContabile> getMovimenti(Date dal, Date al){
+    public List<MovimentoContabile> getMovimenti(Integer pageN, Integer elemsN, Date al){
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String a = format.format(al);
+        String url = "getPaged/" + String.valueOf(pageN) + "/" + String.valueOf(elemsN) + "/" + a;
+        return (List<MovimentoContabile>)get(url, MovimentoContabile.class, true);
+    }
 
-        List<MovimentoContabile> result = new ArrayList<MovimentoContabile>();
+    public MovimentoContabile getMovimento(Integer id){
+        return (MovimentoContabile) get("getMovimento/" + String.valueOf(id), MovimentoContabile.class, false);
+    }
+
+    private Object get(String url, Class<?> clazz, boolean array){
+        Object result = null;
         try {
-            DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-            String da = "x";
-            if (dal != null)
-                da = format.format(dal);
-            String a = format.format(new Date());
-            if(al != null)
-                a = format.format(al);
-            String url = "getAllMovimenti"; ///" + da + "/" + a;
             HttpResponse response = get(url);
             String jsonResult = toJson(response);
-            result = (List<MovimentoContabile>) fromJsonArray(jsonResult, MovimentoContabile.class);
-        }catch(Exception e){
+            if (array)
+                result = fromJsonArray(jsonResult, clazz);
+            else
+                result = fromJson(jsonResult, clazz);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return result;

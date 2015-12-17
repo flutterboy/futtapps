@@ -47,7 +47,7 @@ angular.module('contabilita.movimenti', [
 				dataBroadcaster.send('ricercaMovimentiResult', res);
 			},
 			dataBroadcaster: dataBroadcaster,
-			$http: $http
+			$http: $http2015
 		});
 		
 	}

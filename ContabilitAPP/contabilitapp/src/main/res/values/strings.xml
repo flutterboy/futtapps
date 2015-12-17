@@ -11,6 +11,7 @@
 
     <string name="action_settings">Impostazioni</string>
     <string name="action_add_movimento">Nuovo</string>
+    <string name="action_modify">Modifica</string>
     <string name="action_add_movimento_mic">Nuovo (a voce)</string>
 
     <string name="action_search">Cerca</string>

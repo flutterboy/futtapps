@@ -1,5 +1,6 @@
 package it.negro.contab.repository;
 
+import it.negro.contab.entity.Documento;
 import it.negro.contab.entity.MovimentoContabile;
 import it.negro.contab.entity.Direzione;
 import it.negro.contab.entity.Target;
@@ -9,13 +10,15 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.repository.query.MongoEntityInformation;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.util.StringUtils;
 
 public class MovimentoContabileRepository {
@@ -36,18 +39,22 @@ public class MovimentoContabileRepository {
 	}
 	
 	public List<MovimentoContabile> read(DateTime da, DateTime a, String direzione){
-        return read(null , direzione, da, a);
+        return read(null , direzione, da, a, null);
 	}
 	
 	public List<MovimentoContabile> read(){
-		return read(null , null, null, null);
+        return read(null , null, null, null, null);
 	}
 
 	public List<MovimentoContabile> read(DateTime da, DateTime a){
-        return read(null , null, da, a);
+        return read(null , null, da, a, null);
 	}
 
-    public List<MovimentoContabile> read(String target, String direction, DateTime da, DateTime a){
+    public List<MovimentoContabile> read(Page page, DateTime a){
+        return read(null , null, null, a, page);
+    }
+
+    public List<MovimentoContabile> read(String target, String direction, DateTime da, DateTime a, Page page){
         List<AggregationOperation> aggregations = new ArrayList<AggregationOperation>();
         if (StringUtils.hasLength(target))
             aggregations.add(Aggregation.match(Criteria.where("target").is(target)));
@@ -58,9 +65,32 @@ public class MovimentoContabileRepository {
         if (a != null)
             aggregations.add(Aggregation.match(Criteria.where("data").lte(a.toDate())));
         aggregations.add(Aggregation.sort(Direction.DESC, "data"));
+        if (page != null) {
+            aggregations.add(Aggregation.skip(page.skip()));
+            aggregations.add(Aggregation.limit(page.limit()));
+        }
+//        aggregations.add(Aggregation.unwind("documento"));
+        aggregations.add(Aggregation.project(Fields.fields("_id", "data", "direzione", "descrizione", "target", "importo")));
         Aggregation aggregation = Aggregation.newAggregation(aggregations);
         AggregationResults<MovimentoContabile> aggregationResults = mongo.aggregate(aggregation, "movimenti", MovimentoContabile.class);
         return aggregationResults.getMappedResults();
+    }
+
+    public Documento readDocumento (Integer idMovimento){
+        try {
+            Query query = new Query(Criteria.where("_id").is(idMovimento));
+            query.fields().include("documento");
+            Documento documento = mongo.findOne(query, Documento.class, "movimenti");
+            return documento;
+        } catch (Exception e) {
+           return null;
+        }
+    }
+
+    public MovimentoContabile readMovimento (Integer idMovimento){
+        Query query = new Query(Criteria.where("_id").is(idMovimento));
+        MovimentoContabile movimento = mongo.findOne(query, MovimentoContabile.class, "movimenti");
+        return movimento;
     }
 
 	public void create(MovimentoContabile movimento){

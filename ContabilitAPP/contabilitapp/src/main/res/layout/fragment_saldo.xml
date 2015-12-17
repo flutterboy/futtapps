@@ -4,13 +4,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="it.negro.contabilitapp.SaldoActivity">
-
+        tools:context="it.negro.contabilitapp.fragments.SaldoFragment">
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"
-            android:id="@+id/movimentiView"
+            android:id="@+id/saldoView"
             android:fillViewport="false">
 
         <TextView

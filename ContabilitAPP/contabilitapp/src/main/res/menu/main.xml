@@ -10,6 +10,10 @@
           android:title="@string/action_add_movimento_mic"
           android:icon="@drawable/ic_mic_white_24dp"
           app:showAsAction="always"/>
+    <item android:id="@+id/action_modify"
+          android:title="@string/action_modify"
+          android:icon="@drawable/ic_mode_edit_white_24dp"
+          app:showAsAction="always"/>
     <item android:id="@+id/action_search"
           android:title="@string/action_search"
           android:icon="@drawable/ic_search_white_24dp"
