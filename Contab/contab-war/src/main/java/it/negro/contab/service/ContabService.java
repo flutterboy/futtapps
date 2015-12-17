@@ -1,13 +1,11 @@
 package it.negro.contab.service;
 
-import it.negro.contab.entity.Saldo;
-import it.negro.contab.entity.SaldoProgressivo;
+import it.negro.contab.entity.*;
 import it.negro.contab.repository.FileRepository;
 import it.negro.contab.repository.MovimentoContabileRepository;
+import it.negro.contab.repository.Page;
 import it.negro.contab.repository.SaldoRepository;
 import it.negro.contab.converter.DateTimeArgument;
-import it.negro.contab.entity.Direzione;
-import it.negro.contab.entity.MovimentoContabile;
 
 import java.io.IOException;
 import java.util.Date;
@@ -54,6 +52,12 @@ public class ContabService extends AbstractContabService {
 	public @ResponseBody List<MovimentoContabile> get()throws Exception{
 		return movimentoContabileRepository.read();
 	}
+
+	@RequestMapping(value = "/rest/getPaged/{pageN}/{elemN}/{dataA}", method = RequestMethod.GET)
+	public @ResponseBody List<MovimentoContabile> get(@PathVariable("pageN") Integer pageN, @PathVariable("elemN") Integer elemN, @PathVariable("dataA") @DateTimeArgument DateTime dataA)throws Exception{
+		Page page = new Page(pageN, elemN);
+		return movimentoContabileRepository.read(page, dataA);
+	}
 	
 	@RequestMapping(value = "/rest/get/{da}/{a}/{direzione}", method = RequestMethod.GET)
 	public @ResponseBody List<MovimentoContabile> get(@PathVariable("da") @DateTimeArgument DateTime da, @PathVariable("a") @DateTimeArgument DateTime a, @PathVariable("direzione")String direzione)throws Exception{
@@ -99,7 +103,17 @@ public class ContabService extends AbstractContabService {
 				.contentType(MediaType.parseMediaType("application/octet-stream"))
 				.body(new InputStreamResource(document.getInputStream()));
 	}
-	
+
+	@RequestMapping(value = "/rest/getDocumento/{id}", method = RequestMethod.GET)
+	public @ResponseBody Documento getDocumento(@PathVariable("id") Integer id)throws IOException{
+		return movimentoContabileRepository.readDocumento(id);
+	}
+
+	@RequestMapping(value = "/rest/getMovimento/{id}", method = RequestMethod.GET)
+	public @ResponseBody MovimentoContabile getMovimento(@PathVariable("id") Integer id)throws IOException{
+		return movimentoContabileRepository.readMovimento(id);
+	}
+
 	@RequestMapping(value="/rest/delete/{id}/{da}/{a}", method = RequestMethod.GET)
 	public @ResponseBody List<MovimentoContabile> delete(@PathVariable("id") Integer id, @PathVariable("da") @DateTimeArgument DateTime da, @PathVariable("a") @DateTimeArgument DateTime a){
 		movimentoContabileRepository.delete(id);
